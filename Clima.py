@@ -3,7 +3,7 @@ import requests
 
 class ClimaAPI:
     def __init__(self):
-        self.api_key = "829f2ac5d6b13a18b95a3fd95b4370d0"
+        self.api_key = "API_KEY"
 
     def informacoes_clima(self, city):
         link = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={self.api_key}&lang=pt_br"
