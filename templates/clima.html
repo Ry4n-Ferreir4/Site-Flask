@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Informações Meteorológicas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Informações Meteorológicas para {{ cidade }}</h1>
+    <div class="container">
+        <table>
+            <tr>
+                <td><strong>Descrição: </strong></td>
+                <td>{{ descricao }}</td>
+            </tr>
+            <tr>
+                <td><strong>Temperatura: </strong></td>
+                <td>{{ temperatura }}°C</td>
+            </tr>
+            <tr>
+                <td><strong>Pressão: </strong></td>
+                <td>{{ pressao }} hPa</td>
+            </tr>
+            <tr>
+                <td><strong>Umidade: </strong></td>
+                <td>{{ umidade }}%</td>
+            </tr>
+            <tr>
+                <td><strong>Vento: </strong></td>
+                <td>{{ vento_velocidade }} m/s, {{ vento_direcao }}°</td>
+            </tr>
+            <tr>
+                <td><strong>Nuvens: </strong></td>
+                <td>{{ nuvens }}%</td>
+            </tr>
+        </table>
+        <a href="/" class="btn">Voltar à tela inicial</a>
+    </div>
+    
+     
+</body>
+</html>

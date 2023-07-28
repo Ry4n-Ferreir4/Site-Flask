@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Consulta de Tempo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Consulta de Tempo</h1>
+        {% if erro %}
+        <div class="erro">{{ erro }}</div>
+        {% endif %}
+        <form action="/" method="post">
+            <label for="estado">Selecione seu Estado:</label>
+            <select id="estado" name="estado">
+                <option value="" disabled selected>Selecione um estado</option>
+                {% for estado in cidades %}
+                    <option value="{{ estado }}">{{ estado }}</option>
+                {% endfor %}
+            </select>
+            <label for="cidade">Selecione sua Cidade:</label>
+            <div id="cidades-div">
+                <select id="cidade" name="cidade" disabled>
+                    <option value="" disabled selected>Selecione um estado primeiro</option>
+                </select>
+            </div>
+            <input type="submit" value="Consultar">
+        </form>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const cidadesPorEstado = {
+                {% for estado, cidades in cidades.items() %}
+            "{{ estado }}": [
+                {% for cidade in cidades %}
+                            "{{ cidade }}",
+            {% endfor %}
+                    ],
+            {% endfor %}
+            };
+        
+        const estadoSelect = document.getElementById("estado");
+        const cidadeSelect = document.getElementById("cidade");
+        
+        estadoSelect.addEventListener("change", () => {
+            const estadoSelecionado = estadoSelect.value;
+            cidadeSelect.disabled = estadoSelecionado === "";
+            cidadeSelect.innerHTML = `<option value="" disabled selected>Selecione uma cidade</option>`;
+            if (estadoSelecionado !== "") {
+                const cidadesDoEstado = cidadesPorEstado[estadoSelecionado];
+                cidadesDoEstado.forEach((cidade) => {
+                    const option = document.createElement("option");
+                    option.text = cidade;
+                    option.value = cidade;
+                    cidadeSelect.add(option);
+                });
+            }
+        });
+        });
+    </script>
+</body>
+</html>
